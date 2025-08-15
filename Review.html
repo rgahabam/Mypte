@@ -8,6 +8,12 @@
     <link rel="shortcut icon" href="img/favicin.png">
     <link rel="stylesheet" href="css/plugins.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .form-container {
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,6 +25,42 @@
             </a>
         </div>
     </nav>
+
+    <!-- Main Content Container -->
+    <div class="container form-container">
+        <!-- Add Review Form -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="bg-white p-4 rounded shadow">
+                    <h4 class="mb-4 text-center">Share Your Review</h4>
+                    <form id="reviewForm">
+                        <div class="mb-3">
+                            <label for="reviewerName" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="reviewerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reviewerCountry" class="form-label">Country</label>
+                            <input type="text" class="form-control" id="reviewerCountry" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reviewText" class="form-label">Your Review</label>
+                            <textarea class="form-control" id="reviewText" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2">Submit Review</button>
+                    </form>
+                    <div id="submittedReview" class="mt-4" style="display:none;">
+                        <div class="testimonial-box p-4 bg-light rounded shadow text-center mb-4">
+                            <p class="mb-3" id="displayReviewText"></p>
+                            <h6 class="mb-1" id="displayReviewerName"></h6>
+                            <span class="text-muted small" id="displayReviewerCountry"></span>
+                        </div>
+                        <div class="alert alert-success text-center mb-0">Thank you for your review!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <section class="testimonials section-padding bg-img" style="background-image: url('img/pattern.png');">
         <div class="container">
             <div class="row justify-content-center">
@@ -323,21 +365,32 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="text-center">
+ <!-- Footer -->
+    <footer class="text-center py-4 bg-dark text-white">
         <div class="container">
-            <a class="logo" href="index.html">
+            <a class="logo d-inline-block mb-3" href="index.html">
                 <img src="img/logo-light.png" alt="logo">
             </a>
-            <p>&copy; 2025 Get your certificate online. All Rights Reserved.</p>
+            <p class="mb-0">&copy; 2025 Get your certificate online. All Rights Reserved.</p>
         </div>
     </footer>
 
     <!-- Scripts -->
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            document.getElementById('displayReviewText').textContent = document.getElementById('reviewText').value;
+            document.getElementById('displayReviewerName').textContent = document.getElementById('reviewerName').value;
+            document.getElementById('displayReviewerCountry').textContent = document.getElementById('reviewerCountry').value;
+            document.getElementById('reviewForm').style.display = 'none';
+            document.getElementById('submittedReview').style.display = 'block';
+            
+            // Scroll to show the submitted review
+            document.getElementById('submittedReview').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
     <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
 </body>
-
 </html>
